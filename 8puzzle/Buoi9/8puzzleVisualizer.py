@@ -3,6 +3,184 @@ import copy
 import asyncio
 
 
+def solve_simple_hill_climbing(matrix, winMatrix):
+    def costCal(thisMatrix):
+        hn = 0
+        x1 = x2 = y1 = y2 = 0
+        for a in range(1, 9):
+            for i in range(3):
+                for j in range(3):
+                    if thisMatrix[i][j] == a:
+                        x1, y1 = i, j
+            for i in range(3):
+                for j in range(3):
+                    if winMatrix[i][j] == a:
+                        x2, y2 = i, j
+            hn = hn + abs(x1 - x2) + abs(y1 - y2)
+        return hn
+
+    father = None
+    action = "None"
+    step = 0
+    cost = costCal(matrix)
+
+    info = [[matrix, father, action, step, cost]]
+    done = False
+
+    while not done:
+        for i in range(3):
+            for j in range(3):
+                if matrix[i][j] == 0:
+                    x, y = i, j
+
+        moved = False
+
+        if x > 0:
+            newMatrix = copy.deepcopy(matrix)
+            newMatrix[x][y] = newMatrix[x-1][y]
+            newMatrix[x-1][y] = 0
+            childCost = costCal(newMatrix)
+            if childCost < cost:
+                matrix = newMatrix
+                cost = childCost
+                step = step+1
+                info.append([newMatrix, matrix, "UP", step, cost])
+                moved = True
+
+        if not moved and x < 2:
+            newMatrix = copy.deepcopy(matrix)
+            newMatrix[x][y] = newMatrix[x+1][y]
+            newMatrix[x+1][y] = 0
+            childCost = costCal(newMatrix)
+            if childCost < cost:
+                matrix = newMatrix
+                cost = childCost
+                step = step+1
+                info.append([newMatrix, matrix, "DOWN", step, cost])
+                moved = True
+
+        if not moved and y > 0:
+            newMatrix = copy.deepcopy(matrix)
+            newMatrix[x][y] = newMatrix[x][y-1]
+            newMatrix[x][y-1] = 0
+            childCost = costCal(newMatrix)
+            if childCost < cost:
+                matrix = newMatrix
+                cost = childCost
+                step = step+1
+                info.append([newMatrix, matrix, "LEFT", step, cost])
+                moved = True
+
+        if not moved and y < 2:
+            newMatrix = copy.deepcopy(matrix)
+            newMatrix[x][y] = newMatrix[x][y+1]
+            newMatrix[x][y+1] = 0
+            childCost = costCal(newMatrix)
+            if childCost < cost:
+                matrix = newMatrix
+                cost = childCost
+                step = step+1
+                info.append([newMatrix, matrix, "RIGHT", step, cost])
+                moved = True
+
+        if not moved:
+            done = True
+
+    pathMatrix = [state[0] for state in info]
+    pathAction = [state[2] for state in info]
+    pathStep = [state[3] for state in info]
+    return pathMatrix, pathAction, pathStep
+
+
+def solve_steepest_ascent_hill_climbing(matrix, winMatrix):
+    def costCal(thisMatrix):
+        hn = 0
+        x1 = x2 = y1 = y2 = 0
+        for a in range(1, 9):
+            for i in range(3):
+                for j in range(3):
+                    if thisMatrix[i][j] == a:
+                        x1, y1 = i, j
+            for i in range(3):
+                for j in range(3):
+                    if winMatrix[i][j] == a:
+                        x2, y2 = i, j
+            hn = hn + abs(x1 - x2) + abs(y1 - y2)
+        return hn
+
+    father = None
+    action = "None"
+    step = 0
+    cost = costCal(matrix)
+
+    info = [[matrix, father, action, step, cost]]
+    done = False
+
+    while not done:
+        for i in range(3):
+            for j in range(3):
+                if matrix[i][j] == 0:
+                    x, y = i, j
+
+        bestMatrix = None
+        bestCost = cost
+        bestAction = None
+
+        if x > 0:
+            newMatrix = copy.deepcopy(matrix)
+            newMatrix[x][y] = newMatrix[x-1][y]
+            newMatrix[x-1][y] = 0
+            childCost = costCal(newMatrix)
+            if childCost < bestCost:
+                bestMatrix = newMatrix
+                bestCost = childCost
+                bestAction = "UP"
+
+        if x < 2:
+            newMatrix = copy.deepcopy(matrix)
+            newMatrix[x][y] = newMatrix[x+1][y]
+            newMatrix[x+1][y] = 0
+            childCost = costCal(newMatrix)
+            if childCost < bestCost:
+                bestMatrix = newMatrix
+                bestCost = childCost
+                bestAction = "DOWN"
+
+        if y > 0:
+            newMatrix = copy.deepcopy(matrix)
+            newMatrix[x][y] = newMatrix[x][y-1]
+            newMatrix[x][y-1] = 0
+            childCost = costCal(newMatrix)
+            if childCost < bestCost:
+                bestMatrix = newMatrix
+                bestCost = childCost
+                bestAction = "LEFT"
+
+        if y < 2:
+            newMatrix = copy.deepcopy(matrix)
+            newMatrix[x][y] = newMatrix[x][y+1]
+            newMatrix[x][y+1] = 0
+            childCost = costCal(newMatrix)
+            if childCost < bestCost:
+                bestMatrix = newMatrix
+                bestCost = childCost
+                bestAction = "RIGHT"
+
+        if bestMatrix is not None:
+            fatherMatrix = matrix
+            matrix = bestMatrix
+            cost = bestCost
+            step = step + 1
+            info.append([matrix, fatherMatrix, bestAction, step, cost])
+        else:
+            done = True
+
+    pathMatrix = [state[0] for state in info]
+    pathAction = [state[2] for state in info]
+    pathStep = [state[3] for state in info]
+    return pathMatrix, pathAction, pathStep
+
+
 def solve_bfs(matrix, winMatrix):
     father = None
     action = None
@@ -1016,6 +1194,8 @@ def main(page: ft.Page):
             ft.dropdown.Option("UCS"),
             ft.dropdown.Option("A*"),
             ft.dropdown.Option("IDA*"),
+            ft.dropdown.Option("Simple Hill Climbing"),
+            ft.dropdown.Option("Steepest Ascent Hill Climbing"),
         ],
         value="BFS",
         width=150
@@ -1082,6 +1262,10 @@ def main(page: ft.Page):
             pathMatrix, pathAction, pathStep = solve_astar(matrix, winMatrix)
         elif selected_algo == "IDA*":
             pathMatrix, pathAction, pathStep = solve_idastar(matrix, winMatrix)
+        elif selected_algo == "Simple Hill Climbing":
+            pathMatrix, pathAction, pathStep = solve_simple_hill_climbing(matrix, winMatrix)
+        elif selected_algo == "Steepest Ascent Hill Climbing":
+            pathMatrix, pathAction, pathStep = solve_steepest_ascent_hill_climbing(matrix, winMatrix)
 
         if pathMatrix:
             log_view.controls.append(ft.Text(f"Tìm thấy đích sau {len(pathMatrix) - 1} bước!", color="green"))
