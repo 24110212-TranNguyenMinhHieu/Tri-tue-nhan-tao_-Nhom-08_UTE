@@ -681,38 +681,17 @@ def main(page: ft.Page):
         width=250
     )
 
-    # 2. Input Fields Tùy Biến
+    # 2. Input Fields Tùy Biến (Đã bỏ visible=False để luôn hiển thị)
     start1_input = ft.TextField(label="Start 1 (VD: 1 2 3 4 0 6 7 5 8)", value="1 2 3 4 0 6 7 5 8", width=250)
-    start2_input = ft.TextField(label="Start 2 (VD: 1 2 3 4 5 6 7 0 8)", value="1 2 3 4 5 6 7 0 8", width=250,
-                                visible=False)
+    start2_input = ft.TextField(label="Start 2 (VD: 1 2 3 4 5 6 7 0 8)", value="1 2 3 4 5 6 7 0 8", width=250)
 
     goal1_input = ft.TextField(label="Goal 1 (VD: 1 2 3 4 5 6 7 8 0)", value="1 2 3 4 5 6 7 8 0", width=250)
-    goal2_input = ft.TextField(label="Goal 2 (VD: 1 2 3 4 5 6 7 8 0)", value="1 2 3 4 5 6 7 8 0", width=250,
-                               visible=False)
+    goal2_input = ft.TextField(label="Goal 2 (VD: 1 2 3 4 5 6 7 8 0)", value="1 2 3 4 5 6 7 8 0", width=250)
 
     k_input = ft.TextField(label="K (Beam Search)", value="2", width=120)
     t0_input = ft.TextField(label="T0 (SA)", value="100.0", width=100)
     tmin_input = ft.TextField(label="Tmin (SA)", value="0.01", width=100)
     alpha_input = ft.TextField(label="Alpha (SA)", value="0.99", width=100)
-
-    # Thay đổi giao diện hiển thị input dựa trên mode
-    def mode_changed(e):
-        val = mode_dropdown.value
-        if val == "Hoàn toàn (1 Start - 1 Goal)":
-            start2_input.visible = False
-            goal2_input.visible = False
-        elif val == "Start mù (2 Start - 1 Goal)":
-            start2_input.visible = True
-            goal2_input.visible = False
-        elif val == "Goal mù (1 Start - 2 Goal)":
-            start2_input.visible = False
-            goal2_input.visible = True
-        elif val == "Cả 2 mù (2 Start - 2 Goal)":
-            start2_input.visible = True
-            goal2_input.visible = True
-        page.update()
-
-    mode_dropdown.on_change = mode_changed
 
     log_view = ft.ListView(expand=True, spacing=5, padding=10)
     grid_container = ft.Column(horizontal_alignment=ft.CrossAxisAlignment.CENTER)
@@ -742,18 +721,23 @@ def main(page: ft.Page):
         return ft.Row(boards, alignment=ft.MainAxisAlignment.CENTER)
 
     async def solve_and_animate(e):
+        current_mode = mode_dropdown.value
         try:
             # Thu thập Start States
             raw_s1 = list(map(int, start1_input.value.split()))
             start_state = ([raw_s1[i:i + 3] for i in range(0, 9, 3)],)
-            if start2_input.visible:
+
+            # Chỉ lấy Start 2 nếu mode yêu cầu
+            if current_mode in ["Start mù (2 Start - 1 Goal)", "Cả 2 mù (2 Start - 2 Goal)"]:
                 raw_s2 = list(map(int, start2_input.value.split()))
                 start_state = start_state + ([raw_s2[i:i + 3] for i in range(0, 9, 3)],)
 
             # Thu thập Goal States
             raw_g1 = list(map(int, goal1_input.value.split()))
             goals = [[raw_g1[i:i + 3] for i in range(0, 9, 3)]]
-            if goal2_input.visible:
+
+            # Chỉ lấy Goal 2 nếu mode yêu cầu
+            if current_mode in ["Goal mù (1 Start - 2 Goal)", "Cả 2 mù (2 Start - 2 Goal)"]:
                 raw_g2 = list(map(int, goal2_input.value.split()))
                 goals.append([raw_g2[i:i + 3] for i in range(0, 9, 3)])
         except:
@@ -765,7 +749,7 @@ def main(page: ft.Page):
         selected_algo = algo_dropdown.value
         log_view.controls.clear()
         log_view.controls.append(
-            ft.Text(f"Đang tính toán bằng {selected_algo} với {mode_dropdown.value}...", color="yellow"))
+            ft.Text(f"Đang tính toán bằng {selected_algo} với {current_mode}...", color="yellow"))
 
         grid_container.controls.clear()
         grid_container.controls.append(ft.Text("BƯỚC: 0 | INIT", size=20))
