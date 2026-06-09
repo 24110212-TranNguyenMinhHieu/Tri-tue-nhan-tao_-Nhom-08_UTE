@@ -819,7 +819,7 @@ def main(page: ft.Page):
 
     # Layout ghép
     page.add(
-        ft.Text("8-Puzzle Belief States Visualizer", size=30, weight="bold", color="blueaccent"),
+        ft.Text("8-Puzzle Visualizer", size=30, weight="bold", color="blueaccent"),
 
         # Hàng 1: Dropdown Setup
         ft.Row([mode_dropdown, algo_dropdown], alignment=ft.MainAxisAlignment.CENTER),
