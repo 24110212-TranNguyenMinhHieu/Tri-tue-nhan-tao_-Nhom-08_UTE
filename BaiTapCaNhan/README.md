@@ -36,14 +36,33 @@ Chạy file mã nguồn Python. Giao diện "8-Puzzle Belief States Visualizer" 
 
 <img width="1918" height="1006" alt="image" src="https://github.com/user-attachments/assets/2dbdb2e8-3e6f-4062-bb16-08dee31305a2" />
 
-
 B3. Nhập dữ liệu đầu vào
 - Chọn "Độ quan sát (Môi trường)" ở menu thả xuống đầu tiên. Giao diện sẽ tự động hiển thị số lượng ô nhập liệu Start/Goal tương ứng.
 - Tại các ô Start/Goal, bạn cần nhập đúng 9 số (từ 0 đến 8, không trùng lặp), cách nhau bởi khoảng trắng. (Ví dụ: 1 2 3 4 0 6 7 5 8).
+
+<img width="613" height="132" alt="image" src="https://github.com/user-attachments/assets/b6cb5f31-b7f7-411b-a4d7-42410beb4624" />
+
 B4. Chọn thuật toán và Giải
 - Tại mục "Thuật toán", mở menu thả xuống và chọn thuật toán bạn muốn chạy.
+
+<img width="302" height="82" alt="image" src="https://github.com/user-attachments/assets/7d680aa4-eeca-41e3-9d48-4323a8fe9d8c" />
+<img width="686" height="920" alt="image" src="https://github.com/user-attachments/assets/40d6f6fc-c39f-469e-81b8-361c684ee70f" />
+
+
 *(Lưu ý: Nếu chọn Local Beam Search, bạn có thể tùy chỉnh thông số "K". Nếu chọn Simulated Annealing, bạn có thể chỉnh thông số "T0", "Tmin", và "Alpha" ở các ô bên cạnh).*
+
+<img width="397" height="157" alt="image" src="https://github.com/user-attachments/assets/d2b1722e-8546-4a22-b5ba-a69677e6c55c" />
+
+
 - Nhấn nút "Bắt Đầu Trực Quan (Giải)" có biểu tượng Play.
+
+<img width="296" height="52" alt="image" src="https://github.com/user-attachments/assets/98083dac-4eb8-4fce-aa09-ae63b2c975b4" />
+
 B5. Quan sát quá trình và kết quả
 Hệ thống sẽ thông báo "Đang tính toán..." ở cột Log bên phải.
+
+<img width="1918" height="1007" alt="image" src="https://github.com/user-attachments/assets/fe6c6852-46d0-4d3d-a87e-8f6422c66707" />
+
 Khi tìm ra đường đi, log sẽ in ra tổng số bước và chi tiết từng hành động. Đồng thời, các ma trận ở giữa màn hình sẽ tự động di chuyển các ô số mô phỏng lại y hệt quá trình giải bài toán (chạy song song cho toàn bộ belief states).
+
+<img width="1918" height="1017" alt="image" src="https://github.com/user-attachments/assets/cd161065-998e-44e1-9c28-1531f142b062" />
