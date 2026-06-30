@@ -17,11 +17,28 @@ B1. Chuẩn bị môi trường
 Đảm bảo bạn đã cài đặt thư viện giao diện Flet trên máy bằng lệnh Terminal: pip install flet
 B2. Khởi chạy chương trình
 Chạy file mã nguồn Python. Giao diện "CSP Visualizer (AC-3 & Min-Conflicts)" sẽ hiện lên trên màn hình.
+
+<img width="1918" height="1017" alt="image" src="https://github.com/user-attachments/assets/c4e02557-e6c5-4868-b3a8-496c8083a589" />
+
 B3. Lựa chọn thuật toán
 - Tại mục "Thuật toán", mở menu thả xuống và chọn thuật toán bạn muốn chạy (Min-Conflicts hoặc AC-3).
-- *(Lưu ý: Nếu chọn AC-3, giao diện sẽ xuất hiện thêm một bảng nhập liệu. Bạn cần nhập 9 dòng miền giá trị (domain) khởi tạo, mỗi dòng là các số cách nhau bởi khoảng trắng. Mặc định là 0 đến 8).*
+- 
+<img width="285" height="222" alt="image" src="https://github.com/user-attachments/assets/374d1168-589d-4344-881b-c3e03cb26bde" />
+
 B4. Cài đặt tốc độ
 - Chọn "Tốc độ hiển thị" ở menu thả xuống tiếp theo (Nhanh, Bình thường, hoặc Chậm) để tiện theo dõi hoạt ảnh.
+
+<img width="211" height="276" alt="image" src="https://github.com/user-attachments/assets/734b9bf7-f8d7-498b-b563-463e84ced672" />
+
 B5. Bắt đầu Giải
 - Nhấn nút "Bắt Đầu Trực Quan" có biểu tượng Play.
+
+<img width="256" height="65" alt="image" src="https://github.com/user-attachments/assets/66736ced-9150-4578-be2f-93a3509498df" />
+
 - Chương trình sẽ hiển thị trực tiếp quá trình biến đổi các ô số trên lưới 3x3 ở bên trái, đồng thời xuất ra log các thao tác tính toán chi tiết ở bảng "Nhật ký thực thi" bên phải.
+
+<img width="1918" height="1012" alt="image" src="https://github.com/user-attachments/assets/71c31b91-04eb-4cb9-bbab-3bb8df294c5a" />
+
+<img width="1918" height="1012" alt="image" src="https://github.com/user-attachments/assets/39914005-12f0-4e31-b969-254b57fcf9c5" />
+
+<img width="1918" height="1011" alt="image" src="https://github.com/user-attachments/assets/ae7b850a-c02e-4ff2-877e-eea38a1b69fc" />
