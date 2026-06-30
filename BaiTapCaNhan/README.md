@@ -46,6 +46,8 @@ B4. Chọn thuật toán và Giải
 - Tại mục "Thuật toán", mở menu thả xuống và chọn thuật toán bạn muốn chạy.
 
 <img width="302" height="82" alt="image" src="https://github.com/user-attachments/assets/7d680aa4-eeca-41e3-9d48-4323a8fe9d8c" />
+
+(Khi bấm vào sẽ hiện ra một list các thuật toán)
 <img width="686" height="920" alt="image" src="https://github.com/user-attachments/assets/40d6f6fc-c39f-469e-81b8-361c684ee70f" />
 
 
