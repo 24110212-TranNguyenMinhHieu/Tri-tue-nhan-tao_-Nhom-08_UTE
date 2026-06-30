@@ -33,6 +33,10 @@ B1. Chuẩn bị môi trường
 Đảm bảo bạn đã cài đặt thư viện giao diện Flet trên máy bằng lệnh Terminal: pip install flet
 B2. Khởi chạy chương trình
 Chạy file mã nguồn Python. Giao diện "8-Puzzle Belief States Visualizer" sẽ hiện lên trên màn hình.
+
+<img width="1918" height="1006" alt="image" src="https://github.com/user-attachments/assets/2dbdb2e8-3e6f-4062-bb16-08dee31305a2" />
+
+
 B3. Nhập dữ liệu đầu vào
 - Chọn "Độ quan sát (Môi trường)" ở menu thả xuống đầu tiên. Giao diện sẽ tự động hiển thị số lượng ô nhập liệu Start/Goal tương ứng.
 - Tại các ô Start/Goal, bạn cần nhập đúng 9 số (từ 0 đến 8, không trùng lặp), cách nhau bởi khoảng trắng. (Ví dụ: 1 2 3 4 0 6 7 5 8).
